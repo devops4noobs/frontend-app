@@ -47,7 +47,7 @@ pipeline {
             steps {
                 // Build Docker image
                 script {
-                    docker.build(DOCKER_IMAGE)
+                    sh 'docker build -t ${AWS_ECR_REPO_NAME} .'
                 }
             }
         }
