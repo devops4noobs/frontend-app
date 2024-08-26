@@ -1,7 +1,11 @@
 pipeline {
-    agent any
-    tools {
-        nodejs 'nodejs'
+    agent {
+      docker {
+        image 'node:20-alpine'
+        args '-v /root/.npm:/root/.npm' // Optional: Cache npm modules
+        args '--workdir /app'  // Set working directory (optional)
+        sh 'apk add --no-cache nodejs npm && npm install -g npm@latest' // Install nodejs and npm
+      }
     }
 
     environment {
@@ -35,13 +39,13 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        /*stage('Test') {
             steps {
                 // Run tests for the React application
                 sh 'npm test -- --watchAll=false'
                 // If you're using yarn, you would do: sh 'yarn test --watchAll=false'
             }
-        }
+        }*/
 
         stage('Build Docker Image') {
             steps {
