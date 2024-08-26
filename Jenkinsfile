@@ -1,5 +1,5 @@
 pipeline {
-     agent { dockerContainer true }
+     agent { dockerfile true }
 
     environment {
         // Define environment variables
