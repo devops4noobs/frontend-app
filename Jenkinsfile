@@ -47,7 +47,7 @@ pipeline {
             steps {
                 // Build Docker image
                 script {
-                    dockerImage  = docker.build registry   + ":$BUILD_NUMBER"
+                    sh 'docker build -t ":$BUILD_NUMBER" .'
                 }
             }
         }
