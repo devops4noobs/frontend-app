@@ -6,9 +6,9 @@ pipeline {
 
     environment {
         // Define environment variables
-        DOCKER_IMAGE = "devops4noobs/frontend:${env.BUILD_ID}"
-        DOCKER_CREDENTIALS_ID = "docker"
-        REGISTRY_URL = "https://index.docker.io/v1/"
+        DOCKER_IMAGE = ""
+        DOCKER_CREDENTIALS_ID = "devops4noobs"
+        REGISTRY_URL = "devops4noobs/frontend"
     }
 
     stages {
@@ -47,8 +47,7 @@ pipeline {
             steps {
                 // Build Docker image
                 script {
-                  sh ' docker login -u $REGISTRY_USER -p $REGISTRY_PASS'
-                    sh 'docker build -t devops4noobs/frontend .'
+                    DOCKER_IMAGE = docker.build registry  + ":$BUILD_NUMBER"
                 }
             }
         }
