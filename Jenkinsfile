@@ -7,7 +7,7 @@ pipeline {
     environment {
         // Define environment variables
         DOCKER_IMAGE = "devops4noobs/frontend:${env.BUILD_ID}"
-        DOCKER_CREDENTIALS_ID = "devops4noobs"
+        DOCKER_CREDENTIALS_ID = "docker"
         REGISTRY_URL = "https://index.docker.io/v1/"
     }
 
