@@ -47,7 +47,7 @@ pipeline {
             steps {
                 // Build Docker image
                 script {
-                    sh 'docker build -t ${AWS_ECR_REPO_NAME} .'
+                    sh 'docker build -t frontend:${env.BUILD_ID} .'
                 }
             }
         }
