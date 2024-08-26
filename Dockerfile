@@ -11,7 +11,7 @@ RUN npm run build
 CMD ["npm", "start"]
 
 # Prepare nginx
-FROM nginx
+#FROM nginx
 
 # ENV CURL_VERSION=8.2.1
 
@@ -31,10 +31,10 @@ FROM nginx
 # RUN touch /var/run/nginx.pid && \
 #     chown -R cip-fe /var/run/nginx.pid
 
-COPY --from=builder /app/build /usr/share/nginx/html
+#COPY --from=builder /app/build /usr/share/nginx/html
 #RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+#COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Fire up nginx
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+#EXPOSE 80
+#CMD ["nginx", "-g", "daemon off;"]
