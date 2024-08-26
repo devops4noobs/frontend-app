@@ -47,6 +47,7 @@ pipeline {
             steps {
                 // Build Docker image
                 script {
+                  sh ' docker login -u $REGISTRY_USER -p $REGISTRY_PASS'
                     sh 'docker build -t devops4noobs/frontend .'
                 }
             }
