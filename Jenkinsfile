@@ -47,7 +47,7 @@ pipeline {
             steps {
                 // Build Docker image
                 script {
-                    DOCKER_IMAGE = docker.build registry  + ":$BUILD_NUMBER"
+                    DOCKER_IMAGE = docker.build REGISTRY_URL  + ":$BUILD_NUMBER"
                 }
             }
         }
