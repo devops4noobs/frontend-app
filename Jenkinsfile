@@ -47,7 +47,7 @@ pipeline {
             steps {
                 // Build Docker image
                 script {
-                    sh 'docker build -t frontend:${env.BUILD_ID} .'
+                    sh 'docker build -t "devops4noobs/frontend:${env.BUILD_ID}" .'
                 }
             }
         }
