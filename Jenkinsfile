@@ -1,11 +1,6 @@
 pipeline {
     agent {
-      docker {
-        image 'node:20-alpine'
-        args '-v /root/.npm:/root/.npm' // Optional: Cache npm modules
-        args '--workdir /app'  // Set working directory (optional)
-        sh 'apk add --no-cache nodejs npm && npm install -g npm@latest' // Install nodejs and npm
-      }
+      'nodejs'
     }
 
     environment {
