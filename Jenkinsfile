@@ -6,9 +6,9 @@ pipeline {
 
     environment {
         // Define environment variables
-        DOCKER_IMAGE = ""
-        DOCKER_CREDENTIALS_ID = "docker"
-        REGISTRY_URL = "devops4noobs/frontend"
+        dockerImage  = ""
+        registryCredential  = "docker"
+        registry  = "devops4noobs/frontend"
     }
 
     stages {
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 // Build Docker image
                 script {
-                    DOCKER_IMAGE = docker.build REGISTRY_URL  + ":$BUILD_NUMBER"
+                    dockerImage  = docker.build registry   + ":$BUILD_NUMBER"
                 }
             }
         }
@@ -56,8 +56,8 @@ pipeline {
             steps {
                 // Push the Docker image to the registry
                 script {
-                    docker.withRegistry(REGISTRY_URL, DOCKER_CREDENTIALS_ID) {
-                        docker.image(DOCKER_IMAGE).push()
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push() 
                     }
                 }
             }
