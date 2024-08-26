@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:20-alpine' // You can use a specific Node.js version here
+            args '-v /root/.npm:/root/.npm' // Optional: Cache npm modules
+        }
+    }
 
     environment {
         // Define environment variables
