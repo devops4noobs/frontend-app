@@ -1,8 +1,5 @@
 pipeline {
-     agent any 
-      tools {
-          nodejs 'nodejs'
-      }
+     agent { dockerfile true }
 
     environment {
         // Define environment variables
