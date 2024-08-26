@@ -47,7 +47,7 @@ pipeline {
             steps {
                 // Build Docker image
                 script {
-                    sh 'docker build -t "devops4noobs/frontend:${BUILD_NUMBER}" .'
+                    sh 'docker build -t devops4noobs/frontend .'
                 }
             }
         }
