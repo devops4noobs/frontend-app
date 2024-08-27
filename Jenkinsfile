@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         // Define environment variables
-        DOCKER_IMAGE  = 'devops4noobs/frontend:${BUILD_NUMBER}'
+        DOCKER_IMAGE  = "devops4noobs/frontend:${BUILD_NUMBER}"
         DOCKER_CREDENTIALS_ID   = "docker-hub-credentials"
         REGISTRY_URL = "https://index.docker.io/v1/"
     }
@@ -27,7 +27,7 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build code') {
             steps {
                 // Build the React application
                 sh 'npm run build'
