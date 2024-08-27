@@ -42,19 +42,12 @@ pipeline {
                 // If you're using yarn, you would do: sh 'yarn test --watchAll=false'
             }
         }*/
-        stage('Login to Docker Hub') {
-            steps {
-                script {
-                    
-                }
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
                 // Build Docker image
                 script {
-                    sh 'docker build -t ":$BUILD_NUMBER" .'
+                    //sh 'docker build -t ":$BUILD_NUMBER" .'
                     dockerImage = docker.build('registry:$BUILD_NUMBER')
                 }
             }
