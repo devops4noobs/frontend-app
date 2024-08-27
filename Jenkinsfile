@@ -59,7 +59,7 @@ pipeline {
             steps {
                 // Push the Docker image to the registry
                 script {
-                    docker.withRegistry(REGISTRY_URL, DOCKER_CREDENTIALS_ID) {
+                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
                         docker.image(DOCKER_IMAGE).push()
                     }
                 }
