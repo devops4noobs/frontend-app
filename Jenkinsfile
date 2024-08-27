@@ -6,9 +6,10 @@ pipeline {
 
     environment {
         // Define environment variables
-        dockerImage  = ""
-        registryCredential  = "docker"
-        registry  = "devops4noobs/frontend"
+        //dockerImage  = ""
+        //registryCredential  = "docker"
+        //registry  = "devops4noobs/frontend"
+        DOCKER_HUB_CREDENTIALS = credentials('docker')
     }
 
     stages {
@@ -42,6 +43,13 @@ pipeline {
                 // If you're using yarn, you would do: sh 'yarn test --watchAll=false'
             }
         }*/
+        stage('Login to Docker Hub') {
+            steps {
+                script {
+                    sh 'echo $DOCKER_HUB_CREDENTIALS_PSW | docker login -u $DOCKER_HUB_CREDENTIALS_USR --password-stdin'
+                }
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
