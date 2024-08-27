@@ -49,7 +49,7 @@ pipeline {
                     sh 'echo $DOCKER_HUB_CREDENTIALS_PSW'
                     sh 'echo $DOCKER_HUB_CREDENTIALS_USR'
                     sh 'echo $DOCKER_HUB_CREDENTIALS'
-                    sh 'docker login -u $DOCKER_HUB_CREDENTIALS_USR -p dckr_pat_8410Nz8G02_gskR2Jp7bvmi0gsU'
+                    sh 'echo $DOCKER_HUB_CREDENTIALS_PSW | docker login -u $DOCKER_HUB_CREDENTIALS_USR --password-stdin'
                 }
             }
         }
