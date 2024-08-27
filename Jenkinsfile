@@ -60,13 +60,13 @@ pipeline {
                 // Push the Docker image to the registry
                 script {
                      // Login to Docker Hub
-                    sh 'echo $DOCKER_HUB_CREDENTIALS_PSW | docker login -u $DOCKER_HUB_CREDENTIALS_USR --password-stdin'
+                    sh 'echo $DOCKER_HUB_CREDENTIALS_PSW | docker login -u $DOCKER_HUB_USERNAME --password-stdin'
 
                     // Tag the Docker image
-                    sh 'docker tag registry:$BUILD_NUMBER $DOCKER_HUB_CREDENTIALS_USR/registry:$BUILD_NUMBER'
+                    sh 'docker tag registry:$BUILD_NUMBER $DOCKER_HUB_USERNAME/registry:$BUILD_NUMBER'
 
                     // Push the Docker image
-                    sh 'docker push $DOCKER_HUB_CREDENTIALS_USR/registry:$BUILD_NUMBER'
+                    sh 'docker push $DOCKER_HUB_USERNAME/registry:$BUILD_NUMBER'
                 }
             }
         }
