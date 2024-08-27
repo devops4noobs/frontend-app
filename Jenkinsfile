@@ -6,9 +6,9 @@ pipeline {
 
     environment {
         // Define environment variables
-        dockerImage  = ""
-        registryCredential  = "docker-hub-credentials"
-        registry  = "devops4noobs/frontend"
+        DOCKER_IMAGE  = 'devops4noobs/frontend:${BUILD_NUMBER}'
+        DOCKER_CREDENTIALS_ID   = "docker-hub-credentials"
+        REGISTRY_URL = "https://index.docker.io/v1/"
     }
 
     stages {
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 // Build Docker image
                 script {
-                    sh 'docker build -t "registry:$BUILD_NUMBER" .'
+                    docker.build(DOCKER_IMAGE)
                     //dockerImage = docker.build('registry:$BUILD_NUMBER')
                 }
             }
@@ -59,14 +59,9 @@ pipeline {
             steps {
                 // Push the Docker image to the registry
                 script {
-                     // Login to Docker Hub
-                    sh 'echo $DOCKER_HUB_CREDENTIALS_PSW | docker login -u $DOCKER_HUB_USERNAME --password-stdin'
-
-                    // Tag the Docker image
-                    sh 'docker tag registry:$BUILD_NUMBER $DOCKER_HUB_USERNAME/registry:$BUILD_NUMBER'
-
-                    // Push the Docker image
-                    sh 'docker push $DOCKER_HUB_USERNAME/registry:$BUILD_NUMBER'
+                    docker.withRegistry(REGISTRY_URL, DOCKER_CREDENTIALS_ID) {
+                        docker.image(DOCKER_IMAGE).push()
+                    }
                 }
             }
         }
