@@ -42,6 +42,13 @@ pipeline {
                 // If you're using yarn, you would do: sh 'yarn test --watchAll=false'
             }
         }*/
+        stage('Login to Docker Hub') {
+            steps {
+                script {
+                    
+                }
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
