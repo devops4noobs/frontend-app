@@ -48,7 +48,7 @@ pipeline {
                 script {
                     sh 'echo $DOCKER_HUB_CREDENTIALS_PSW'
                     sh 'echo $DOCKER_HUB_CREDENTIALS_USR'
-                    sh 'echo DOCKER_HUB_CREDENTIALS'
+                    sh 'echo $DOCKER_HUB_CREDENTIALS'
                     sh 'echo $DOCKER_HUB_CREDENTIALS_PSW | docker login -u $DOCKER_HUB_CREDENTIALS_USR --password-stdin'
                 }
             }
