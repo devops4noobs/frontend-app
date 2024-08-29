@@ -30,9 +30,7 @@ pipeline {
         stage('Sonarqube Analysis') {
             steps {
                     withSonarQubeEnv('sonar-server') {
-                        sh ''' $SCANNER_HOME/bin/sonar-scanner \
-                        -Dsonar.projectName=frontend-app \
-                        -Dsonar.projectKey=frontend-app '''
+                        sh 'sonar-scanner'
                     }
             }
         }
