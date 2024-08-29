@@ -6,6 +6,7 @@ pipeline {
 
     environment {
         // Define environment variables
+        SCANNER_HOME=tool 'sonar-scanner'
         DOCKER_IMAGE  = "devops4noobs/frontend:${BUILD_NUMBER}"
         DOCKER_CREDENTIALS_ID   = "docker-hub-credentials"
         REGISTRY_URL = "https://index.docker.io/v1/"
@@ -16,6 +17,40 @@ pipeline {
             steps {
                 // Checkout the code from the repository
                 checkout scm
+            }
+        }
+
+        stage("Sonarqube Analysis") {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'sonar-token') {
+                        sh "mvn sonar:sonar"
+                    }
+                }
+            }
+
+        }
+
+        stage('Quality Check') {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token' 
+                }
+            }
+        }
+
+        stage('OWASP Dependency-Check Scan') {
+            steps {
+               
+        dependencyCheck additionalArguments: "--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey 5c7f2699-a072-4b9d-a66c-9fc7e4671c8d", odcInstallation: 'DP-Check'
+        dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+
+            }
+        }
+
+        stage('Trivy File Scan') {
+            steps {
+                    sh 'trivy fs . > trivyfs.txt'
             }
         }
 
@@ -63,6 +98,12 @@ pipeline {
                         docker.image(DOCKER_IMAGE).push()
                     }
                 }
+            }
+        }
+        
+        stage("Trivy Image Scan") {
+            steps {
+                sh 'trivy image ${DOCKER_IMAGE} > trivyimage.txt' 
             }
         }
     }
