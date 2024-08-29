@@ -20,15 +20,14 @@ pipeline {
             }
         }
 
-        stage("Sonarqube Analysis") {
+        stage('Sonarqube Analysis') {
             steps {
-                script {
-                    withSonarQubeEnv(credentialsId: 'sonar-token') {
-                        sh "mvn sonar:sonar"
+                    withSonarQubeEnv('sonar-server') {
+                        sh ''' $SCANNER_HOME/bin/sonar-scanner \
+                        -Dsonar.projectName=devops4noobs \
+                        -Dsonar.projectKey=devops4noobs '''
                     }
-                }
             }
-
         }
 
         stage('Quality Check') {
@@ -100,7 +99,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage("Trivy Image Scan") {
             steps {
                 sh 'trivy image ${DOCKER_IMAGE} > trivyimage.txt' 
