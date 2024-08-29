@@ -31,8 +31,9 @@ pipeline {
             steps {
                     withSonarQubeEnv('sonar-server') {
                         sh ''' $SCANNER_HOME/bin/sonar-scanner \
-                        -Dsonar.projectName=devops4noobs \
-                        -Dsonar.projectKey=devops4noobs '''
+                         -Dsonar.projectKey=frontend-app \
+                         -Dsonar.sources=. \
+                         -Dsonar.host.url=http://35.156.47.158:9000 \ '''
                     }
             }
         }
