@@ -30,10 +30,9 @@ pipeline {
         stage('Sonarqube Analysis') {
             steps {
                     withSonarQubeEnv('sonar-server') {
-                        sh '''' $SCANNER_HOME/bin/sonar-scanner \
-                         -Dsonar.projectKey=frontend-app \
-                         -Dsonar.sources=. \
-                         -Dsonar.host.url=http://35.156.47.158:9000 '''
+                        sh ''' $SCANNER_HOME/bin/sonar-scanner \
+                        -Dsonar.projectName=frontend-app \
+                        -Dsonar.projectKey=frontend-app '''
                     }
             }
         }
