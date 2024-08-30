@@ -9,7 +9,7 @@ pipeline {
         SCANNER_HOME=tool 'sonar-scanner'
         DOCKER_IMAGE  = "devops4noobs/frontend:${BUILD_NUMBER}"
         DOCKER_CREDENTIALS_ID   = "docker-hub-credentials"
-        REGISTRY_URL = "https://index.docker.io/"
+        REGISTRY_URL = "https://docker.io/"
     }
 
     stages {
