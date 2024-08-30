@@ -88,8 +88,8 @@ pipeline {
             steps {
                 // Build Docker image
                 script {
-                    sh 'docker system prune -f'
-                    sh 'docker container prune -f'
+                    //sh 'docker system prune -f'
+                    //sh 'docker container prune -f'
                     docker.build(DOCKER_IMAGE)
                     //dockerImage = docker.build('registry:$BUILD_NUMBER')
                 }
