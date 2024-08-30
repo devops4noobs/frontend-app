@@ -100,18 +100,16 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                // Push the Docker image to the registry
-                script {
-                    try {
-                    docker.withRegistry(REGISTRY_URL, DOCKER_CREDENTIALS_ID) {
-                        docker.image(DOCKER_IMAGE).push()
-                        }
-                    }
-                    } catch (Exception e) {
-                        error "Failed to push Docker image: ${e.message}"
-                        }
+        script {
+            try {
+                docker.withRegistry(REGISTRY_URL, DOCKER_CREDENTIALS_ID) {
+                    docker.image(DOCKER_IMAGE).push()
                 }
+            } catch (Exception e) {
+                error "Failed to push Docker image: ${e.message}"
             }
+        }
+    }
         }
 
         stage("Trivy Image Scan") {
