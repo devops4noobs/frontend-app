@@ -13,7 +13,7 @@ interface User {
   age: number;
 }
 
-const baseUrl = 'http://localhost:8080'; 
+const baseUrl = 'http://localhost:3000'; 
 
 function App(): JSX.Element {
   const [formData, setFormData] = useState<FormData>({
